@@ -47,6 +47,7 @@
 
 @implementation GMGridViewCell
 
+@synthesize activityIndicator = _activityIndicator;
 @synthesize contentView = _contentView;
 @synthesize editing = _editing;
 @synthesize inShakingMode = _inShakingMode;
