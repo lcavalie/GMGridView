@@ -95,14 +95,24 @@
     {
         NSInteger widthSpace, heightSpace;        
         NSInteger top, left, bottom, right;
+        BOOL horizontalCenteringOnly = true;        // this is a not a parameter from the top level
+                                                    // it is defined only here
         
         widthSpace  = floor((self.gridBounds.size.width  - actualContentSize.width)  / 2.0);
-        heightSpace = floor((self.gridBounds.size.height - actualContentSize.height) / 2.0);
+        if (horizontalCenteringOnly) {
+            heightSpace = floor(self.gridBounds.size.height - actualContentSize.height);
+            top    = self.minEdgeInsets.top;        // the top is set to the minimum edge
+            bottom = MAX(heightSpace, self.minEdgeInsets.bottom);
+        }
+        else
+        {    
+            heightSpace = floor((self.gridBounds.size.height - actualContentSize.height) / 2.0);        
+            top    = MAX(heightSpace, self.minEdgeInsets.top);
+            bottom = MAX(heightSpace, self.minEdgeInsets.bottom);
+        }
         
         left   = MAX(widthSpace,  self.minEdgeInsets.left);
         right  = MAX(widthSpace,  self.minEdgeInsets.right);
-        top    = MAX(heightSpace, self.minEdgeInsets.top);
-        bottom = MAX(heightSpace, self.minEdgeInsets.bottom);
         
         _edgeInsets = UIEdgeInsetsMake(top, left, bottom, right);
     }

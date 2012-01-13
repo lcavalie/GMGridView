@@ -1361,11 +1361,14 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
                           delay:0
                         options:kDefaultAnimationOptions
                      animations:^{
-                         [self scrollToObjectAtIndex:index animated:NO];
+                         //[self scrollToObjectAtIndex:index animated:NO];
                          currentView.alpha = 0;
                          cell.alpha = 1;
                      } 
                      completion:^(BOOL finished){
+                         if (cell.activityIndicator.isAnimating) {
+                             [cell.activityIndicator stopAnimating];
+                         }
                          [currentView removeFromSuperview];
                      }
      ];
